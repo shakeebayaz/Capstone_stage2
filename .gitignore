@@ -39,3 +39,6 @@ captures/
 .idea/workspace.xml
 
 
+/.idea/
+/gradlew
+/gradlew.bat
