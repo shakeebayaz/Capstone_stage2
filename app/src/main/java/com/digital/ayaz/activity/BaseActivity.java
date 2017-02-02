@@ -21,6 +21,7 @@ public class BaseActivity extends AppCompatActivity implements ConnectivityRecei
 
     public ProgressDialog mProgress;
     private TextView noInternetMsg;
+    protected  Context mContext;
 
     public void showProgress() {
         showProgress(getString(R.string.progress_msg));
@@ -128,6 +129,7 @@ public class BaseActivity extends AppCompatActivity implements ConnectivityRecei
     @Override
     public void onResume() {
         super.onResume();
+        mContext=this;
         if (noInternetMsg != null)
             if (!isNetworkConnected()) {
                 noInternetMsg.setVisibility(View.VISIBLE);

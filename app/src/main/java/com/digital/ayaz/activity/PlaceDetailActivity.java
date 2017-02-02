@@ -1,8 +1,10 @@
 package com.digital.ayaz.activity;
 
 import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.net.Uri;
@@ -25,7 +27,10 @@ import com.digital.ayaz.Utils.Constants;
 import com.digital.ayaz.Utils.Utility;
 import com.digital.ayaz.app.MainApplication;
 import com.digital.ayaz.databinding.PlaceDetailLayoutBinding;
+import com.digital.ayaz.storage.DataBase;
 import com.digital.ayaz.storage.DatabaseSave;
+import com.digital.ayaz.storage.TouristContract;
+import com.digital.ayaz.storage.TouristProvider;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -131,13 +136,16 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
         mBinding.saveText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ContentResolver contentResolver = mContext.getContentResolver();
+                Cursor cursor = null;
                 switch (choice) {
                     case 1:
-
-                        if (!db.getPlaces(place_id)) {
+                        cursor = contentResolver.query(TouristContract.PlaceEntry.CONTENT_URI,
+                                null, TouristProvider.sPlaceIdSelection, new String[]{"" + place_id}, null);
+                        if (cursor != null && cursor.getCount() <= 0) {
                             mBinding.saveText.setText(R.string.saved);
                             mBinding.saveText.setTextColor(Color.RED);
-                            db.addPlaces(place_id);
+                            contentResolver.insert(TouristContract.PlaceEntry.CONTENT_URI, DataBase.populateContentValue(DataBase.DataType.place,place_id));
                         } else {
                             showSnack(PlaceDetailActivity.this, R.string.already_saved);
                         }
@@ -145,39 +153,43 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
 
                     case 2:
 
-                        if (!db.gethotel(place_id)) {
-
+                        cursor = contentResolver.query(TouristContract.HotelEntry.CONTENT_URI,
+                                null, TouristProvider.sHotelIdSelection, new String[]{"" + place_id}, null);
+                        if (cursor != null && cursor.getCount() <= 0) {
                             mBinding.saveText.setText(R.string.saved);
                             mBinding.saveText.setTextColor(Color.RED);
-                            db.addHotels(place_id);
+                            contentResolver.insert(TouristContract.HotelEntry.CONTENT_URI, DataBase.populateContentValue(DataBase.DataType.hotel,place_id));
                         } else {
                             showSnack(PlaceDetailActivity.this, R.string.already_saved);
                         }
                         break;
 
                     case 3:
-
-                        if (!db.getRes(place_id)) {
-
+                        cursor = contentResolver.query(TouristContract.RestaurantEntry.CONTENT_URI,
+                                null, TouristProvider.sRestaurantIdSelection, new String[]{"" + place_id}, null);
+                        if (cursor != null && cursor.getCount() <= 0) {
                             mBinding.saveText.setText(R.string.saved);
                             mBinding.saveText.setTextColor(Color.RED);
-                            db.addRestaurants(place_id);
+                            contentResolver.insert(TouristContract.RestaurantEntry.CONTENT_URI, DataBase.populateContentValue(DataBase.DataType.restaurant,place_id));
                         } else {
                             showSnack(PlaceDetailActivity.this, R.string.already_saved);
                         }
+
                         break;
 
                     case 4:
-                        if (!db.getPlaces(place_id)) {
+                        cursor = contentResolver.query(TouristContract.PlaceEntry.CONTENT_URI,
+                                null, TouristProvider.sPlaceIdSelection, new String[]{"" + place_id}, null);
+                        if (cursor != null && cursor.getCount() <= 0) {
                             mBinding.saveText.setText(R.string.saved);
                             mBinding.saveText.setTextColor(Color.RED);
-                            db.addPlaces(place_id);
+                            contentResolver.insert(TouristContract.PlaceEntry.CONTENT_URI, DataBase.populateContentValue(DataBase.DataType.place,place_id));
                         } else {
-
                             showSnack(PlaceDetailActivity.this, R.string.already_saved);
                         }
                         break;
                 }
+                cursor.close();
             }
         });
     }

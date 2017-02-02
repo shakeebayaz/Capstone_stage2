@@ -1,5 +1,9 @@
 package com.digital.ayaz.activity;
 
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Loader;
+import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -15,7 +19,7 @@ import com.digital.ayaz.Utils.Utility;
 import com.digital.ayaz.adapter.PlaceListAdapter;
 import com.digital.ayaz.app.MainApplication;
 import com.digital.ayaz.databinding.SavedListLayoutBinding;
-import com.digital.ayaz.storage.DatabaseSave;
+import com.digital.ayaz.storage.TouristContract;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,19 +28,20 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SavedListActivity extends BaseActivity {
+public class SavedListActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG_PHOTOS_REFERENCE = "photo_reference";
-    DatabaseSave db;
+    private static final int SAVED_LIST_LOADER = 1;
     private PlaceListAdapter placeListAdapter;
     private List<PlaceListDetail> placeListDetailList = new ArrayList<>();
     private SavedListLayoutBinding mBinding;
+    private String mode;
+    List<String> savedPlaceIdList = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.saved_list_layout);
-        db = new DatabaseSave(this);
         mBinding.progressWheel.spin();
         int columnCount = 1;
         StaggeredGridLayoutManager sglm =
@@ -50,35 +55,20 @@ public class SavedListActivity extends BaseActivity {
                 finish();
             }
         });
+        mode = getIntent().getStringExtra("mode");
+        mBinding.name.setText(R.string.saved_res);
+        getLoaderManager().initLoader(SAVED_LIST_LOADER, null, this);
+    }
 
-        String mode = getIntent().getStringExtra("mode");
+    private List<String> getAllSavedItems(Cursor cursor) {
         List<String> savedPlaceIdList = new ArrayList<String>();
-        switch (mode) {
-            case "place":
-                mBinding.name.setText(R.string.saved_place);
-                savedPlaceIdList = db.getAllPlaces();
-                break;
-            case "restaurant":
-                mBinding.name.setText(R.string.saved_res);
-                savedPlaceIdList = db.getAllRes();
-                break;
-            case "hotel":
-                mBinding.name.setText(R.string.saved_hotels);
-                savedPlaceIdList = db.getAllHotels();
-                break;
-        }
-        placeListAdapter = new PlaceListAdapter(this, placeListDetailList, 1);
-        mBinding.recyclerView.setAdapter(placeListAdapter);
-        if (savedPlaceIdList.size() > 0) {
-            for (String id : savedPlaceIdList) {
-                getPlaceDetail(Utility.getPlaceApiUrlFromPLaceId(this, id));
-            }
-        } else {
-            mBinding.nodata.setVisibility(View.VISIBLE);
-            mBinding.progressWheel.stopSpinning();
-        }
 
-
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                savedPlaceIdList.add(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+        return savedPlaceIdList;
     }
 
     public void getPlaceDetail(String url) {
@@ -120,6 +110,57 @@ public class SavedListActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
+
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        CursorLoader loader = null;
+        switch (mode) {
+            case "place":
+                mBinding.name.setText(R.string.saved_place);
+                loader = new CursorLoader(
+                        this,
+                        TouristContract.PlaceEntry.buildPlaceUri(),
+                        null, null, null, null);
+                break;
+            case "restaurant":
+                mBinding.name.setText(R.string.saved_res);
+                loader = new CursorLoader(
+                        this,
+                        TouristContract.RestaurantEntry.buildRestaurantUri(),
+                        null, null, null, null);
+                break;
+            case "hotel":
+                mBinding.name.setText(R.string.saved_hotels);
+                loader = new CursorLoader(
+                        this,
+                        TouristContract.HotelEntry.buildHotelsUri(),
+                        null, null, null, null);
+                break;
+        }
+
+        return loader;
+
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        savedPlaceIdList = getAllSavedItems(data);
+        placeListAdapter = new PlaceListAdapter(this, placeListDetailList, 1);
+        mBinding.recyclerView.setAdapter(placeListAdapter);
+        if (savedPlaceIdList.size() > 0) {
+            for (String id : savedPlaceIdList) {
+                getPlaceDetail(Utility.getPlaceApiUrlFromPLaceId(this, id));
+            }
+        } else {
+            mBinding.nodata.setVisibility(View.VISIBLE);
+            mBinding.progressWheel.stopSpinning();
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
 
     }
 }

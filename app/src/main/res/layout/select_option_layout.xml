@@ -83,11 +83,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
-                android:drawableLeft="@drawable/ic_hotel"
+                android:drawableLeft="@drawable/ic_food"
                 android:drawablePadding="20dp"
                 android:gravity="left|center"
                 android:paddingBottom="8dp"
-                android:text="@string/restaurants"
+                android:text="@string/food_court"
                 android:textColor="#000"
                 android:textSize="20sp" />
             <View
@@ -103,11 +103,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
-                android:drawableLeft="@drawable/ic_food"
+                android:drawableLeft="@drawable/ic_hotel"
                 android:drawablePadding="20dp"
                 android:gravity="left|center"
                 android:paddingBottom="8dp"
-                android:text="@string/food_court"
+                android:text="@string/hotel"
                 android:textColor="#000"
                 android:textSize="20sp" />
             <View

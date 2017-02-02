@@ -98,6 +98,13 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
+
+        <provider
+            android:name=".storage.TouristProvider"
+            android:authorities="com.digital.ayaz"
+            android:enabled="true"
+            android:exported="false"
+            android:syncable="true" />
     </application>
 
 </manifest>
