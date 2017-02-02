@@ -6,10 +6,9 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.digital.ayaz.app.MainApplication;
-
 public class ConnectivityReceiver extends BroadcastReceiver {
     public static ConnectivityReceiverListener connectivityReceiverListener;
+
     public ConnectivityReceiver() {
         super();
     }

@@ -16,8 +16,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.digital.ayaz.Utils.Constants;
 import com.digital.ayaz.Utils.Utility;
 import com.digital.ayaz.activity.MainActivity;
-import com.digital.ayaz.storage.DatabaseSave;
 import com.digital.ayaz.app.MainApplication;
+import com.digital.ayaz.storage.DatabaseSave;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,7 +42,7 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
             Cursor data = new DatabaseSave(context).getSavedHotels();
             if (data.moveToFirst()) {
                 do {
-                    place_name = getPlaceDetail(Utility.getPlaceApiUrlFromPLaceId(context,data.getString(1)));
+                    place_name = getPlaceDetail(Utility.getPlaceApiUrlFromPLaceId(context, data.getString(1)));
 
                 } while (data.moveToNext());
             }

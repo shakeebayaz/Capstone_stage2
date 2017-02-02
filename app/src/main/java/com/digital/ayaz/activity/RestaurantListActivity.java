@@ -4,9 +4,9 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 
-import com.digital.ayaz.databinding.CommonRecyclerBinding;
 import com.digital.ayaz.R;
 import com.digital.ayaz.adapter.ViewPagerAdapter;
+import com.digital.ayaz.databinding.CommonRecyclerBinding;
 
 public class RestaurantListActivity extends BaseActivity {
 
@@ -17,7 +17,7 @@ public class RestaurantListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.common_recycler);
-        setToolBar(mBinding.toolBar,"");
+        setToolBar(mBinding.toolBar, "");
         mBinding.toolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

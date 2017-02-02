@@ -17,6 +17,7 @@ public class ViewPagerAdapterTourist extends FragmentPagerAdapter {
         this.mTitle = mTitles;
 
     }
+
     @Override
     public Fragment getItem(int position) {
         switch (position) {
@@ -30,10 +31,12 @@ public class ViewPagerAdapterTourist extends FragmentPagerAdapter {
                 return null;
         }
     }
+
     @Override
     public CharSequence getPageTitle(int position) {
         return mTitle[position];
     }
+
     @Override
     public int getCount() {
         return 2;

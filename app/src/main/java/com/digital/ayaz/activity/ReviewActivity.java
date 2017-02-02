@@ -58,7 +58,7 @@ public class ReviewActivity extends BaseActivity {
         adapter = new ReviewAdapter(this, author_name, author_review, author_rating);
         listView.setAdapter(adapter);
 
-        getReviews(Utility.getPlaceApiUrlFromPLaceId(this,place_id));
+        getReviews(Utility.getPlaceApiUrlFromPLaceId(this, place_id));
     }
 
     public void getReviews(String url) {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -22,9 +23,9 @@ import org.json.JSONObject;
 
 public class SelectOptionActivity extends BaseActivity implements OnMapReadyCallback {
 
-    String placeid;
     private static final String TAG_GEOMETRY = "geometry";
     private static final String TAG_LOCATION = "location";
+    String placeid;
     Double lat, lng;
     private GoogleMap mGooleMap;
     private SelectOptionLayoutBinding mBinding;

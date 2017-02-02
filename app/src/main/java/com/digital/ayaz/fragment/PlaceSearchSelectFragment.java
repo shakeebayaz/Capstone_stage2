@@ -23,8 +23,13 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 public class PlaceSearchSelectFragment extends BaseFragment implements GoogleApiClient.OnConnectionFailedListener {
     private static final String ARG_SECTION_NUMBER = "section_number";
+    private static final LatLngBounds BOUNDS = new LatLngBounds(
+            new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
     protected GoogleApiClient mGoogleApiClient;
     private FragmentMainBinding mBinding;
+
+    public PlaceSearchSelectFragment() {
+    }
 
     public static PlaceSearchSelectFragment newInstance(int sectionNumber) {
         PlaceSearchSelectFragment fragment = new PlaceSearchSelectFragment();
@@ -33,12 +38,6 @@ public class PlaceSearchSelectFragment extends BaseFragment implements GoogleApi
         fragment.setArguments(args);
         return fragment;
     }
-
-    public PlaceSearchSelectFragment() {
-    }
-
-    private static final LatLngBounds BOUNDS = new LatLngBounds(
-            new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,7 +53,7 @@ public class PlaceSearchSelectFragment extends BaseFragment implements GoogleApi
                 .build();
         final PlaceAutocompleteAdapter mAdapter = new PlaceAutocompleteAdapter(getActivity(), android.R.layout.simple_list_item_1,
                 mGoogleApiClient, BOUNDS, null);
-       mBinding.enterplace.setAdapter(mAdapter);
+        mBinding.enterplace.setAdapter(mAdapter);
 
         mBinding.enterplace.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

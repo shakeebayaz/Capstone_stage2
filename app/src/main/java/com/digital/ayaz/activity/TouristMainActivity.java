@@ -2,12 +2,8 @@ package com.digital.ayaz.activity;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.graphics.DashPathEffect;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.android.volley.Response;
@@ -16,7 +12,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.digital.ayaz.R;
 import com.digital.ayaz.Utils.Constants;
 import com.digital.ayaz.Utils.PlaceListDetail;
-import com.digital.ayaz.Utils.ProgressWheel;
 import com.digital.ayaz.Utils.Utility;
 import com.digital.ayaz.adapter.PlaceListAdapter;
 import com.digital.ayaz.app.MainApplication;
@@ -31,12 +26,12 @@ import java.util.List;
 
 public class TouristMainActivity extends BaseActivity {
 
-    private PlaceListAdapter placeListAdapter;
-    private List<PlaceListDetail> placeListDetailList = new ArrayList<>();
     private static final String TAG_ICON = "icon";
     private static final String TAG_PLACE_ID = "place_id";
     private static final String TAG_RATING = "rating";
     private static final String TAG_PHOTOS_REFERENCE = "photo_reference";
+    private PlaceListAdapter placeListAdapter;
+    private List<PlaceListDetail> placeListDetailList = new ArrayList<>();
     private Double latitude, longitude;
     private TouristMainLayoutBinding mBinding;
 

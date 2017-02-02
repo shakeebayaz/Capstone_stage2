@@ -1,9 +1,74 @@
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:choiceMode="singleChoice"
-    android:background="#fff"
-    android:divider="@android:color/transparent"
-    android:dividerHeight="0dp"
-    tools:context=".NavigationDrawerFragment" />
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout android:id="@+id/list_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="0dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="7dp"
+    android:layout_marginRight="7dp"
+    android:layout_marginTop="-10dp"
+    android:layout_weight="1"
+    android:background="@drawable/round_rectangle"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/tourist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:drawableLeft="@drawable/ic_location"
+        android:drawablePadding="20dp"
+        android:gravity="left|center"
+        android:paddingBottom="8dp"
+        android:text="@string/tourist"
+        android:textColor="#000"
+        android:textSize="20sp" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#dfdfdf" />
+
+    <TextView
+        android:id="@+id/restaurants"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:drawableLeft="@drawable/ic_hotel"
+        android:drawablePadding="20dp"
+        android:gravity="left|center"
+        android:paddingBottom="8dp"
+        android:text="@string/restaurants"
+        android:textColor="#000"
+        android:textSize="20sp" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#dfdfdf" />
+
+    <TextView
+        android:id="@+id/hotels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:drawableLeft="@drawable/ic_food"
+        android:drawablePadding="20dp"
+        android:gravity="left|center"
+        android:paddingBottom="8dp"
+        android:text="@string/food_court"
+        android:textColor="#000"
+        android:textSize="20sp" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#dfdfdf" />
+</LinearLayout>
+</layout>

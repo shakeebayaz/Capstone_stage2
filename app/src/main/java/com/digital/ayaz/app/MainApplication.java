@@ -5,15 +5,22 @@ import android.text.TextUtils;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.digital.ayaz.brodcast_n_service.ConnectivityReceiver;
 
 public class MainApplication extends Application {
 
-    private RequestQueue mRequestQueue;
-    private static MainApplication mInstance;
     public static final String TAG = MainApplication.class.getSimpleName();
+    private static MainApplication mInstance;
+    private RequestQueue mRequestQueue;
+
+    public MainApplication() {
+        super();
+    }
+
+    public static synchronized MainApplication getInstance() {
+        return mInstance;
+    }
 
     @Override
 
@@ -22,17 +29,12 @@ public class MainApplication extends Application {
         mInstance = this;
     }
 
-    public static synchronized MainApplication getInstance() {
-        return mInstance;
-    }
-
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         }
         return mRequestQueue;
     }
-
 
     public <T> void addToAPIRequestQueue(Request<T> req, String tag) {
         req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
@@ -49,13 +51,6 @@ public class MainApplication extends Application {
             mRequestQueue.cancelAll(tag);
         }
     }
-
-
-    public MainApplication() {
-        super();
-    }
-
-
 
     public void setConnectivityListener(ConnectivityReceiver.ConnectivityReceiverListener listener) {
         ConnectivityReceiver.connectivityReceiverListener = listener;

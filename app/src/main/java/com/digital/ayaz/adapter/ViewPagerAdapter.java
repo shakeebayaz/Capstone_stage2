@@ -10,6 +10,7 @@ import com.digital.ayaz.fragment.Restaurants;
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     CharSequence Titles[];
+
     public ViewPagerAdapter(FragmentManager fm, CharSequence mTitles[]) {
         super(fm);
         this.Titles = mTitles;
@@ -35,6 +36,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return Titles[position];
     }
+
     @Override
     public int getCount() {
         return 2;

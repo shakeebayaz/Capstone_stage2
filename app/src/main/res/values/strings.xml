@@ -3,11 +3,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
     <string name="address">ADDRESS</string>
-    <string name="title">GuideHelp</string>
-    <string name="skip">SKIP</string>
-    <string name="search">SEARCH</string>
     <string name="search_or_select_place">Select or search place</string>
     <string name="hint">Search non-listed places</string>
     <string name="hotel">Hotel</string>
@@ -20,8 +16,6 @@
     <string name="saved_places">Saved Places</string>
     <string name="tourist">Tourist Spots</string>
     <string name="shopping">Shopping</string>
-    <string name="flights">Flights</string>
-    <string name="back">Back</string>
     <string name="time">TIMEING</string>
     <string name="no_data">No Data to display</string>
     <string name="progress_msg">Please wait</string>
@@ -30,13 +24,6 @@
         <item>Saved Hotels</item>
         <item>Saved Restaurants</item>
     </string-array>
-
-    <integer-array name="navitems">
-        <item>@drawable/ic_location</item>
-        <item>@drawable/ic_hotel</item>
-        <item>@drawable/ic_food</item>
-    </integer-array>
-
     <string-array name="places">
         <item>New Delhi, India</item>
         <item>Bangalore, Karnataka, India</item>
@@ -64,10 +51,22 @@
         <item>ChIJP3Sa8ziYEmsRUKgyFmh9AQM</item>
     </string-array>
 
-    <string name="google_key">Add Your Google key</string>
+    <string name="google_key">AIzaSyBJuL43Wydk0TlX-E7Be2Lhcjsy3cxNeAY</string>
     <string name="title_activity_fullscreen">splashActvity</string>
     <string name="error_no_webpage">No web page avialable</string>
     <string name="error_phone_no_available">No Phone No Available</string>
     <string name="already_saved">Already Added</string>
     <string name="user_rating">User Rating Not Available</string>
+    <string name="user_rating_not">User Rating</string>
+    <string name="nav_place_des">Image of Place</string>
+    <string name="nav_arrow_des">Navigation arrow</string>
+    <string name="hotel_icon_des">Hotel Icon</string>
+    <string name="review_icon_des">Review Icon</string>
+    <string name="internet_error_msg">No Internet Connection.Please Connect</string>
+    <string name="saved">SAVED</string>
+    <string name="saved_place">Saved Places</string>
+    <string name="saved_res">Saved Restaurant</string>
+    <string name="saved_hotels">Saved Hotels</string>
+    <string name="tourist_place">Tourist Places</string>
+    <string name="restaurants">Restaurant</string>
 </resources>

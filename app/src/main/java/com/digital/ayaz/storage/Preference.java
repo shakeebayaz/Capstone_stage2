@@ -6,18 +6,14 @@ import android.content.SharedPreferences;
 public class Preference {
 
 
-    private final String FILENAME = "guide_help_preference";
-    private static Preference instance = null;
-    private SharedPreferences sharedPrefrence;
     private static final String DRAWER_HINT = "drawer_hint";
+    private static Preference instance = null;
+    private final String FILENAME = "guide_help_preference";
+    private SharedPreferences sharedPrefrence;
 
-    public boolean isDrawableHintShown() {
-        return sharedPrefrence.getBoolean(DRAWER_HINT, false);
+    private Preference(Context context) {
+        sharedPrefrence = context.getApplicationContext().getSharedPreferences(FILENAME, Context.MODE_PRIVATE);
     }
-    public void setDrawableHintShown(boolean isCompleted) {
-        sharedPrefrence.edit().putBoolean(DRAWER_HINT, isCompleted).commit();
-    }
-
 
     public static Preference getInstance(Context context) {
         if (instance == null) {
@@ -26,8 +22,12 @@ public class Preference {
         return instance;
     }
 
-    private Preference(Context context) {
-        sharedPrefrence = context.getApplicationContext().getSharedPreferences(FILENAME, Context.MODE_PRIVATE);
+    public boolean isDrawableHintShown() {
+        return sharedPrefrence.getBoolean(DRAWER_HINT, false);
+    }
+
+    public void setDrawableHintShown(boolean isCompleted) {
+        sharedPrefrence.edit().putBoolean(DRAWER_HINT, isCompleted).apply();
     }
 
 }

@@ -32,7 +32,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:text="No Internet Connection.Please Connect"
+                android:text="@string/internet_error_msg"
                 android:ellipsize="marquee"
                 android:background="@android:color/holo_red_dark"
                 android:gravity="center"
@@ -54,7 +54,9 @@
                 android:drawablePadding="10dp"
                 android:drawableStart="@drawable/ic_search_black"
                 android:hint="@string/hint"
-                android:paddingLeft="10dp" />
+                android:paddingLeft="10dp"
+                android:paddingStart="10dp"
+                android:paddingRight="10dp"/>
 
         </LinearLayout>
 

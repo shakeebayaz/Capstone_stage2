@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -25,14 +26,14 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.digital.ayaz.databinding.FragmentNavigationDrawerBinding;
 import com.digital.ayaz.storage.DatabaseSave;
 import com.digital.ayaz.activity.SavedListActivity;
 import com.digital.ayaz.adapter.AdapterNavigation;
 import com.digital.ayaz.fragment.BaseFragment;
 import com.digital.ayaz.storage.Preference;
-public class NavigationDrawerFragment extends BaseFragment {
+public class NavigationDrawerFragment extends BaseFragment implements View.OnClickListener{
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
-    DatabaseSave db;
 
     private NavigationDrawerCallbacks mCallbacks;
 
@@ -42,12 +43,12 @@ public class NavigationDrawerFragment extends BaseFragment {
     private ActionBarDrawerToggle mDrawerToggle;
 
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerListView;
     private View mFragmentContainerView;
 
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
+    private FragmentNavigationDrawerBinding mBinding;
 
     public NavigationDrawerFragment() {
     }
@@ -65,9 +66,6 @@ public class NavigationDrawerFragment extends BaseFragment {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
             mFromSavedInstanceState = true;
         }
-
-        db = new DatabaseSave(getActivity());
-        // Select either the default item (0) or the last selected item.
         selectItem(mCurrentSelectedPosition);
     }
 
@@ -81,53 +79,11 @@ public class NavigationDrawerFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(
-                R.layout.fragment_navigation_drawer, container, false);
-
-        Context ctx = getActivity().getApplicationContext();
-
-        Resources res = ctx.getResources();
-        String[] names = res.getStringArray(R.array.nav_items);
-        TypedArray icons = res.obtainTypedArray(R.array.navitems);
-
-        AdapterNavigation adapterNavigation = new AdapterNavigation(getActivity(), R.layout.list_view_for_navigation, names, icons);
-        mDrawerListView.setAdapter(adapterNavigation);
-
-        mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(getActivity(), SavedListActivity.class);
-                switch (position) {
-                    case 0:
-                        i.putExtra("mode", "place");
-                        startActivity(i);
-
-                        break;
-                    case 1:
-                        i.putExtra("mode", "hotel");
-                        startActivity(i);
-                        break;
-                    case 2:
-                        i.putExtra("mode", "restaurant");
-                        startActivity(i);
-                        break;
-                    case 3:
-                        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                        sharingIntent.setType("text/plain");
-                        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,
-                                "Download GuideHelp to  plan your trips perfectly.");
-                        startActivity(Intent.createChooser(sharingIntent,
-                                "Share using"));
-                        break;
-
-                }
-                mDrawerLayout.closeDrawers();
-            }
-        });
-
-
-        mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-        return mDrawerListView;
+        mBinding=DataBindingUtil.inflate(inflater,R.layout.fragment_navigation_drawer, container, false);
+        mBinding.restaurants.setOnClickListener(this);
+        mBinding.hotels.setOnClickListener(this);
+        mBinding.tourist.setOnClickListener(this);
+        return mBinding.getRoot();
     }
 
     public boolean isDrawerOpen() {
@@ -166,7 +122,9 @@ public class NavigationDrawerFragment extends BaseFragment {
 
             @Override
             public void onDrawerOpened(View drawerView) {
+                hideKeyboard();
                 super.onDrawerOpened(drawerView);
+
                 if (!isAdded()) {
                     return;
                 }
@@ -195,9 +153,6 @@ public class NavigationDrawerFragment extends BaseFragment {
 
     private void selectItem(int position) {
         mCurrentSelectedPosition = position;
-        if (mDrawerListView != null) {
-            mDrawerListView.setItemChecked(position, true);
-        }
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
@@ -249,7 +204,33 @@ public class NavigationDrawerFragment extends BaseFragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public static interface NavigationDrawerCallbacks {
+    @Override
+    public void onClick(View v) {
+
+        Intent i = new Intent(getActivity(), SavedListActivity.class);
+
+        switch (v.getId()) {
+            case R.id.tourist:
+                i.putExtra("mode", "place");
+                startActivity(i);
+                selectItem(0);
+                break;
+            case R.id.hotels:
+                i.putExtra("mode", "hotel");
+                startActivity(i);
+                selectItem(1);
+                break;
+            case R.id.restaurants:
+                i.putExtra("mode", "restaurant");
+                startActivity(i);
+                selectItem(2);
+                break;
+        }
+        mDrawerLayout.closeDrawers();
+    }
+
+
+    public  interface NavigationDrawerCallbacks {
 
         void onNavigationDrawerItemSelected(int position);
     }

@@ -11,19 +11,19 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.digital.ayaz.Utils.Constants;
-import com.digital.ayaz.activity.PlaceDetailActivity;
 import com.digital.ayaz.R;
+import com.digital.ayaz.Utils.Constants;
 import com.digital.ayaz.Utils.PlaceListDetail;
+import com.digital.ayaz.activity.PlaceDetailActivity;
 
 import java.util.List;
 
 public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.ViewHolder> {
 
     Context context;
-    private LayoutInflater mInflater;
     List<PlaceListDetail> list;
     int choice;
+    private LayoutInflater mInflater;
 
     public PlaceListAdapter(Context c, List<PlaceListDetail> list, int choice) {
         this.context = c;
@@ -58,7 +58,7 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.View
         PlaceListDetail placeListDetail = list.get(i);
         String url;
         if (placeListDetail.getPhoto_endPointUrl() != null) {
-            url= Constants.PLACE_API_SMALL_IMAGE_URL+placeListDetail.getPhoto_endPointUrl().get(0)+"&key="+context.getResources().getString(R.string.google_key);
+            url = Constants.PLACE_API_SMALL_IMAGE_URL + placeListDetail.getPhoto_endPointUrl().get(0) + "&key=" + context.getResources().getString(R.string.google_key);
         } else {
             url = placeListDetail.getIcon_url();
         }

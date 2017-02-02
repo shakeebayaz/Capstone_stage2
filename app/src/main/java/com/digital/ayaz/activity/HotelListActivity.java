@@ -26,16 +26,13 @@ import java.util.List;
 
 public class HotelListActivity extends BaseActivity {
 
-    private PlaceListAdapter placeListAdapter;
-    private List<PlaceListDetail> placeListDetailList = new ArrayList<>();
-
     private static final String TAG_ICON = "icon";
-
     private static final String TAG_PLACE_ID = "place_id";
     private static final String TAG_RATING = "rating";
-
     private static final String TAG_PHOTOS_REFERENCE = "photo_reference";
     ProgressWheel progressWheel;
+    private PlaceListAdapter placeListAdapter;
+    private List<PlaceListDetail> placeListDetailList = new ArrayList<>();
     private Double latitude, longitude;
     private HotelListBinding mBinding;
 

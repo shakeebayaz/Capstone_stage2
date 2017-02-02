@@ -1,4 +1,4 @@
-package com.digital.ayaz;
+package com.digital.ayaz.brodcast_n_service;
 
 import android.app.IntentService;
 import android.app.LoaderManager;
@@ -9,6 +9,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 
+import com.digital.ayaz.MyAppWidgetProvider;
 import com.digital.ayaz.storage.DatabaseSave;
 
 public class WidgetIntentService extends IntentService implements LoaderManager.LoaderCallbacks<Cursor> {

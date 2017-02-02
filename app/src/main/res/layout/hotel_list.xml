@@ -14,7 +14,8 @@
         android:background="@color/colorPrimary"
         android:elevation="@dimen/fab_elevation"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark">
+        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+        tools:targetApi="lollipop">
 
         <TextView
             android:id="@+id/name"
@@ -34,7 +35,7 @@
         android:ellipsize="marquee"
         android:gravity="center"
         android:padding="2dp"
-        android:text="No Internet Connection.Please Connect"
+        android:text="@string/internet_error_msg"
         android:textColor="@android:color/white"
         android:visibility="gone" />
     <FrameLayout

@@ -4,9 +4,10 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 
-import com.digital.ayaz.databinding.CommonRecyclerBinding;
 import com.digital.ayaz.R;
 import com.digital.ayaz.adapter.ViewPagerAdapterTourist;
+import com.digital.ayaz.databinding.CommonRecyclerBinding;
+
 public class TouristPlaceListActivity extends BaseActivity {
 
     ViewPagerAdapterTourist adapter;
@@ -16,8 +17,8 @@ public class TouristPlaceListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.common_recycler);
-        mBinding.name.setText("Tourist Places");
-        setToolBar(mBinding.toolBar,"");
+        mBinding.name.setText(R.string.tourist_place);
+        setToolBar(mBinding.toolBar, "");
         mBinding.toolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

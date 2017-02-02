@@ -2,9 +2,7 @@ package com.digital.ayaz.fragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -22,8 +20,8 @@ import com.digital.ayaz.brodcast_n_service.ConnectivityReceiver;
 
 public class BaseFragment extends Fragment implements ConnectivityReceiver.ConnectivityReceiverListener {
     protected Context mContext;
-    private ProgressDialog mProgress;
     protected Toolbar toolbar;
+    private ProgressDialog mProgress;
     private TextView noInternetMsg;
 
     @Override
@@ -36,12 +34,12 @@ public class BaseFragment extends Fragment implements ConnectivityReceiver.Conne
     @Override
     public void onResume() {
         super.onResume();
-        if(noInternetMsg!=null)
-        if(!isNetworkConnected()){
-            noInternetMsg.setVisibility(View.VISIBLE);
-        }else {
-            noInternetMsg.setVisibility(View.GONE);
-        }
+        if (noInternetMsg != null)
+            if (!isNetworkConnected()) {
+                noInternetMsg.setVisibility(View.VISIBLE);
+            } else {
+                noInternetMsg.setVisibility(View.GONE);
+            }
     }
 
     public boolean isNetworkConnected() {
@@ -123,8 +121,7 @@ public class BaseFragment extends Fragment implements ConnectivityReceiver.Conne
         if (noInternetMsg != null) {
             if (isConnected) {
                 noInternetMsg.setVisibility(View.GONE);
-            }
-            else {
+            } else {
                 noInternetMsg.setVisibility(View.VISIBLE);
             }
         }

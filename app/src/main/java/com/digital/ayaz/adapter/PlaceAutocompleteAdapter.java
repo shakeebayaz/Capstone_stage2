@@ -133,8 +133,7 @@ public class PlaceAutocompleteAdapter
             }
             Iterator<AutocompletePrediction> iterator = autocompletePredictions.iterator();
             ArrayList resultList = new ArrayList<>(autocompletePredictions.getCount());
-            //TODO fix auto complete
-           while (iterator.hasNext()) {
+            while (iterator.hasNext()) {
                 AutocompletePrediction prediction = iterator.next();
                 resultList.add(new PlaceAutocomplete(prediction.getPlaceId(),
                         prediction.getFullText(null)));
@@ -146,6 +145,7 @@ public class PlaceAutocompleteAdapter
         }
         return null;
     }
+
     public class PlaceAutocomplete {
 
         public CharSequence placeId;

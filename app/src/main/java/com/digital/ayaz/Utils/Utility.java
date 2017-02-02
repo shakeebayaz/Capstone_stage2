@@ -37,8 +37,9 @@ public class Utility {
         sb.append("&key=" + googleApiKey);
         return sb.toString();
     }
-    public static String getPlaceApiUrlFromPLaceId(Context context,String placeId){
-     return    Constants.PLACE_API+placeId+"&key="+context.getResources().getString(R.string.google_key);
+
+    public static String getPlaceApiUrlFromPLaceId(Context context, String placeId) {
+        return Constants.PLACE_API + placeId + "&key=" + context.getResources().getString(R.string.google_key);
     }
 
 }

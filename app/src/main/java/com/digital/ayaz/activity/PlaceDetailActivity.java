@@ -20,18 +20,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
+import com.digital.ayaz.R;
 import com.digital.ayaz.Utils.Constants;
 import com.digital.ayaz.Utils.Utility;
+import com.digital.ayaz.app.MainApplication;
 import com.digital.ayaz.databinding.PlaceDetailLayoutBinding;
+import com.digital.ayaz.storage.DatabaseSave;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.digital.ayaz.R;
-import com.digital.ayaz.storage.DatabaseSave;
-import com.digital.ayaz.app.MainApplication;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,21 +42,16 @@ import java.util.ArrayList;
 public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallback {
 
     private static final int CALLING_PERMISSION = 999;
-    String phone_number, place_website;
-
-
     private static final String TAG_OPENING_HOURS = "opening_hours";
     private static final String TAG_FORMATTED_ADDRESS = "formatted_address";
     private static final String TAG_PHONE_NUMBER = "formatted_phone_number";
     private static final String TAG_TIMETABLE = "weekday_text";
-
     private static final String TAG_PHOTOS_REFERENCE = "photo_reference";
     private static final String TAG_TOTAL_RATING = "user_ratings_total";
     private static final String TAG_WEBSITE = "website";
     private static final String TAG_GEOMETRY = "geometry";
     private static final String TAG_LOCATION = "location";
-
-
+    String phone_number, place_website;
     DatabaseSave db;
     SupportMapFragment fm;
     GoogleMap mGoogleMap;
@@ -133,15 +128,14 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
             }
         });
 
-        mBinding.save.setOnClickListener(new View.OnClickListener() {
+        mBinding.saveText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switch (choice) {
                     case 1:
 
                         if (!db.getPlaces(place_id)) {
-                            mBinding.saveImage.setImageResource(R.drawable.favourite_icon_red);
-                            mBinding.saveText.setText("SAVED");
+                            mBinding.saveText.setText(R.string.saved);
                             mBinding.saveText.setTextColor(Color.RED);
                             db.addPlaces(place_id);
                         } else {
@@ -152,8 +146,8 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
                     case 2:
 
                         if (!db.gethotel(place_id)) {
-                            mBinding.saveImage.setImageResource(R.drawable.favourite_icon_red);
-                            mBinding.saveText.setText("SAVED");
+
+                            mBinding.saveText.setText(R.string.saved);
                             mBinding.saveText.setTextColor(Color.RED);
                             db.addHotels(place_id);
                         } else {
@@ -164,8 +158,8 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
                     case 3:
 
                         if (!db.getRes(place_id)) {
-                            mBinding.saveImage.setImageResource(R.drawable.favourite_icon_red);
-                            mBinding.saveText.setText("SAVED");
+
+                            mBinding.saveText.setText(R.string.saved);
                             mBinding.saveText.setTextColor(Color.RED);
                             db.addRestaurants(place_id);
                         } else {
@@ -175,8 +169,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
 
                     case 4:
                         if (!db.getPlaces(place_id)) {
-                            mBinding.saveImage.setImageResource(R.drawable.favourite_icon_red);
-                            mBinding.saveText.setText("SAVED");
+                            mBinding.saveText.setText(R.string.saved);
                             mBinding.saveText.setTextColor(Color.RED);
                             db.addPlaces(place_id);
                         } else {
@@ -205,7 +198,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
 
                             photos_references.add(photo.optString(TAG_PHOTOS_REFERENCE));
                         }
-                        Glide.with(PlaceDetailActivity.this).load(Constants.PLACE_API_IMAGE_URL + photos_references.get(0) +"&key="+ getString(R.string.google_key)).override(300, 300).centerCrop().into(mBinding.imagePosterFull);
+                        Glide.with(PlaceDetailActivity.this).load(Constants.PLACE_API_IMAGE_URL + photos_references.get(0) + "&key=" + getString(R.string.google_key)).override(300, 300).centerCrop().into(mBinding.imagePosterFull);
                         mBinding.imagePosterFull.setAlpha(0.6f);
 
                     } else {
@@ -226,7 +219,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
                     if (rating > 0) {
                         mBinding.rating.setRating((float) rating);
                         mBinding.rating.setVisibility(View.VISIBLE);
-                        mBinding.userRatingText.setText("User Rating");
+                        mBinding.userRatingText.setText(R.string.user_rating);
                     }
                     if (list.has(TAG_OPENING_HOURS)) {
                         JSONObject timing = list.optJSONObject(TAG_OPENING_HOURS);

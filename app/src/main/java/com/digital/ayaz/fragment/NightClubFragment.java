@@ -12,9 +12,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.digital.ayaz.R;
 import com.digital.ayaz.Utils.Constants;
-import com.digital.ayaz.adapter.PlaceListAdapter;
 import com.digital.ayaz.Utils.PlaceListDetail;
 import com.digital.ayaz.Utils.ProgressWheel;
+import com.digital.ayaz.adapter.PlaceListAdapter;
 import com.digital.ayaz.app.MainApplication;
 
 import org.json.JSONArray;
@@ -26,14 +26,13 @@ import java.util.List;
 
 public class NightClubFragment extends BaseFragment {
 
-    private PlaceListAdapter placeListAdapter;
-    private List<PlaceListDetail> placeListDetailList = new ArrayList<>();
-
     private static final String TAG_ICON = "icon";
     private static final String TAG_PLACE_ID = "place_id";
     private static final String TAG_RATING = "rating";
     private static final String TAG_PHOTOS_REFERENCE = "photo_reference";
     ProgressWheel progressWheel;
+    private PlaceListAdapter placeListAdapter;
+    private List<PlaceListDetail> placeListDetailList = new ArrayList<>();
     private RecyclerView recyclerView;
     private Double latitude, longitude;
 
@@ -53,7 +52,7 @@ public class NightClubFragment extends BaseFragment {
                 new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(sglm);
 
-        placeListAdapter = new PlaceListAdapter(getActivity(), placeListDetailList,1);
+        placeListAdapter = new PlaceListAdapter(getActivity(), placeListDetailList, 1);
         recyclerView.setAdapter(placeListAdapter);
 
         StringBuilder sb = new StringBuilder(
