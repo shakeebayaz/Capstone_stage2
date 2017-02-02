@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'udacity'
             keyPassword '123456'
-            storeFile file('/Users/ats/Downloads/Capstone-Project-master 2/Capstone_Stage2/app/guideme.jks')
+            storeFile file('guideme.jks')
             storePassword '123456'
         }
     }

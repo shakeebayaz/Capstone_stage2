@@ -6,6 +6,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Toast;
 
+import com.digital.ayaz.R;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.Status;
@@ -24,6 +25,7 @@ public class PlaceAutocompleteAdapter
         extends ArrayAdapter<PlaceAutocompleteAdapter.PlaceAutocomplete> implements Filterable {
 
     private static final String TAG = "PlaceAutocomplete";
+    private final Context mContext;
     /**
      * Current results returned by this adapter.
      */
@@ -55,6 +57,7 @@ public class PlaceAutocompleteAdapter
         mGoogleApiClient = googleApiClient;
         mBounds = bounds;
         mPlaceFilter = filter;
+         mContext = context;
     }
 
     /**
@@ -126,7 +129,7 @@ public class PlaceAutocompleteAdapter
                     .await(60, TimeUnit.SECONDS);
             final Status status = autocompletePredictions.getStatus();
             if (!status.isSuccess()) {
-                Toast.makeText(getContext(), "Error contacting API: " + status.toString(),
+                Toast.makeText(getContext(), mContext.getString(R.string.api_error) + status.toString(),
                         Toast.LENGTH_SHORT).show();
                 autocompletePredictions.release();
                 return null;
